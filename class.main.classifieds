@@ -1,0 +1,77 @@
+package me.E_xpresso_Jack.Classifieds;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin { 
+
+	public void onEnable (){
+		getLogger().info("Classifieds Enabled!");
+		
+    
+		
+		
+		
+	}
+	public void onDisable(){
+		getLogger().info("Classifieds Disabled");}
+
+
+
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		PluginManager plg = Bukkit.getPluginManager(); //Assigns plg to Bukkit.getPluginManager()
+		Plugin plgname = plg.getPlugin("Classifieds");
+		if (cmd.getName().equalsIgnoreCase("classified")){ // If the player typed /classified then do the following...
+			if(args.length==0){sender.sendMessage(ChatColor.AQUA + "For help, use /classifieds help");}
+			if (sender instanceof Player){
+				if (args.length==1) //tells first argument 
+				{if (args[1].equalsIgnoreCase("post")){}//post a request for a set amount of items somehow use a list and write to a yaml file.....?
+				 if (args[1].equalsIgnoreCase("delete")){}//check if the job is posted by the user and delete the post
+				 if (args[1].equalsIgnoreCase("accept")){}//accept the job, take off of classifieds
+				 if (args[1].equalsIgnoreCase("unaccept")){}//unaccept the repost to classifieds
+				 if (args[1].equalsIgnoreCase("complete")){}//check if the user completing isn't the completer. let user deposit into a chest interface. store and open up to the poster.
+				 if (args[1].equalsIgnoreCase("open")){} //list the classifieds from a yaml file
+				 else {sender.sendMessage(ChatColor.AQUA +"post,delete,accept,unaccept,complete,open goes after /classified");}
+				} 
+			}// <---- player commands go here
+			else{if (args.length==1){
+				if (args[1].equalsIgnoreCase("reload")){
+					if (args.length > 0){sender.sendMessage(ChatColor.DARK_RED + "too many args!");}
+					else{
+						if (sender instanceof Player){Player player = (Player)sender;
+							if (player.hasPermission("classifieds.reload")){
+								
+								plg.disablePlugin(plgname);
+								plg.enablePlugin(plgname);
+								
+							}
+							else{ sender.sendMessage(ChatColor.DARK_RED + "You do not have enough permissions!");}
+						}   else{
+						        plg.disablePlugin(plgname);
+						        plg.enablePlugin(plgname);}
+					}
+				}
+			}}// <-- console commands go here
+			return true;
+		} //If this has happened the function will return true. 
+	        // If this hasn't happened the value of false will be returned.
+		return false; 
+	}
+
+
+
+
+
+
+}
+                                    
+
+
+
+	
